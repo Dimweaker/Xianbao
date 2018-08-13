@@ -2,17 +2,13 @@
 # -*- coding: utf-8 -*-
 import requests
 from bs4 import BeautifulSoup
-import chardet #字符集检测
-from urllib.request import urlopen
+
 web={1:['https://www.iqshw.com/post/new_100/index%s%s.html','https://www.iqshw.com','_'],2:['https://www.xianbaozhijia.cn/index.php/category-1%s%s.html','','_'],3:['http://www.zuanke8.com/forum-19%s%s.html','','-'],4:['http://www.xianbao5.com/sitemap2.php','','']}
 #1.爱Q生活网，最多两页
 #2.线报之家
 #3.赚客吧
 #4.线报屋，一页，网站不稳定
-def coding(url):
-    html = urlopen(url).read()
-    encoding=chardet.detect(html)
-    return encoding
+
 def create(kind=1,page=1):
     if kind==1 and page==1:
         return [web[kind][0]%('',''),web[kind][1]]
@@ -48,59 +44,9 @@ def write(list=[],url='xianbao1.txt'):
     print('Finish.')
 def go(kind=1,page=1):
     write(arrange(find(get(create(kind,page)[0],kind),kind),create(kind,page)[1]))
-#线报保存的TXT，第3种为ANSI，其余为UTF-8
+
+    #线报保存的TXT，第3种为ANSI，其余为UTF-8
 go(1)
 go(2)
 go(3)#请另开以ANSI为编码的TXT保存
 go(4)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
